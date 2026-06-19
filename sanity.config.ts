@@ -3,6 +3,8 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
+const SINGLETON_TYPES = new Set(['profile'])
+
 export default defineConfig({
   name: 'default',
   title: 'portfolio',
@@ -14,5 +16,7 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+    templates: (templates) =>
+      templates.filter((template) => !SINGLETON_TYPES.has(template.schemaType)),
   },
 })
